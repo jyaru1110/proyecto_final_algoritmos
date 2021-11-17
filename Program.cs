@@ -11,15 +11,21 @@ namespace proyecto_final_algoritmos
             public DateTime fecha_salida;
             public DateTime fecha_llegada;
             public string[] trayectoria;
-            public int id_vuelo;
+            public string id_vuelo;
             public double precio_boleto;
             public double ganancias_totales;
             public TimeSpan tiempo_trayecto;
         }
+        static string GenerarID(){
+            Random rnd = new Random();
+            string id = "";
+            for(int i = 0; i < 4; i++){
+                id += rnd.Next(0,9);
+            }
+            return id;
+        }
         static void AgregarVuelo(List<Vuelo> vuelos){
             Vuelo vuelo = new Vuelo();
-            Console.WriteLine("Ingrese el id del vuelo");
-            vuelo.id_vuelo = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingrese el numero de pasajeros");
             vuelo.num_pasajeros = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingrese la fecha de salida");
@@ -30,13 +36,14 @@ namespace proyecto_final_algoritmos
             vuelo.trayectoria = Console.ReadLine().Split(' ');
             Console.WriteLine("Ingrese el precio del boleto");
             vuelo.precio_boleto = double.Parse(Console.ReadLine());
+            vuelo.id_vuelo=GenerarID();
             vuelo.ganancias_totales= vuelo.num_pasajeros * vuelo.precio_boleto;
             vuelo.tiempo_trayecto = vuelo.fecha_llegada - vuelo.fecha_salida;
             vuelos.Add(vuelo);
         }
         static void BuscarVuelo(List<Vuelo> vuelos){
             Console.WriteLine("Ingrese el id del vuelo");
-            int id = int.Parse(Console.ReadLine());
+            string id = Console.ReadLine();
             foreach(Vuelo vuelo in vuelos){
                 if(vuelo.id_vuelo == id){
                     Console.WriteLine("El vuelo con id "+id+" tiene "+vuelo.num_pasajeros+" pasajeros");
@@ -64,13 +71,13 @@ namespace proyecto_final_algoritmos
             }
         }
         static void Resultados(List<Vuelo> vuelos){
-            Console.WriteLine("-------------------------------------------------------------------------");
-            Console.WriteLine("id|num pasajeros|fecha salida|fecha llegada|Precio boleto|origen|destino|");
-            Console.WriteLine("-------------------------------------------------------------------------");
+            Console.WriteLine("----------------------------------------------------------------------------------------");
+            Console.WriteLine("id  |num pasajeros|   fecha salida    |   fecha llegada   |Precio boleto|origen|destino|");
+            Console.WriteLine("----------------------------------------------------------------------------------------");
             foreach(Vuelo vuelo in vuelos){
-                    Console.WriteLine(vuelo.id_vuelo+"|"+vuelo.num_pasajeros+"|"+vuelo.fecha_salida+"|"+vuelo.fecha_llegada+"|"+vuelo.precio_boleto+"|"+vuelo.trayectoria[0]+"|"+vuelo.trayectoria[1]+"|");
+                    Console.WriteLine(vuelo.id_vuelo+"|      "+vuelo.num_pasajeros+"     |"+vuelo.fecha_salida+"|"+vuelo.fecha_llegada+"|"+vuelo.precio_boleto+"|"+vuelo.trayectoria[0]+"|"+vuelo.trayectoria[vuelo.trayectoria.Length-1]+"|");
+                    Console.WriteLine("----------------------------------------------------------------------------------------");
             }
-
         }
         static void Menu()
         {
@@ -79,7 +86,7 @@ namespace proyecto_final_algoritmos
             List<Vuelo> vuelos = new List<Vuelo>();
             do
             {
-                Console.WriteLine("Bienvenide al programa de la guardería");
+                Console.WriteLine("Bienvenide al programa de la aerolínea");
                 Console.WriteLine("1.- Entrada de Datos");
                 Console.WriteLine("2.- Resultados.");
                 Console.WriteLine("3.- Buscar vuelo por id.");
@@ -117,7 +124,6 @@ namespace proyecto_final_algoritmos
                             if (band)
                             {
                                 Console.WriteLine("Usted está emitiendo los resultados.");
-                                Console.WriteLine("---------------------------------");
                                 Resultados(vuelos);
                             }
                             else
