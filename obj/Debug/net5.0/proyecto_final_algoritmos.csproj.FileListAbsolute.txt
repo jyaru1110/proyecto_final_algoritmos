@@ -1,0 +1,15 @@
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/bin/Debug/net5.0/proyecto_final_algoritmos.deps.json
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/bin/Debug/net5.0/proyecto_final_algoritmos.runtimeconfig.json
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/bin/Debug/net5.0/proyecto_final_algoritmos.runtimeconfig.dev.json
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/bin/Debug/net5.0/proyecto_final_algoritmos.dll
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/bin/Debug/net5.0/ref/proyecto_final_algoritmos.dll
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/bin/Debug/net5.0/proyecto_final_algoritmos.pdb
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/obj/Debug/net5.0/proyecto_final_algoritmos.csproj.AssemblyReference.cache
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/obj/Debug/net5.0/proyecto_final_algoritmos.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/obj/Debug/net5.0/proyecto_final_algoritmos.AssemblyInfoInputs.cache
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/obj/Debug/net5.0/proyecto_final_algoritmos.AssemblyInfo.cs
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/obj/Debug/net5.0/proyecto_final_algoritmos.csproj.CoreCompileInputs.cache
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/obj/Debug/net5.0/proyecto_final_algoritmos.dll
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/obj/Debug/net5.0/ref/proyecto_final_algoritmos.dll
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/obj/Debug/net5.0/proyecto_final_algoritmos.pdb
+/Users/jyaru/Documents/Escuela/PrimerSemestre/algoritmos/proyecto_final_algoritmos/obj/Debug/net5.0/proyecto_final_algoritmos.genruntimeconfig.cache
