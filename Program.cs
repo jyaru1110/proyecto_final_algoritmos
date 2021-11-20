@@ -146,9 +146,9 @@ namespace proyecto_final_algoritmos
         }
         static void Resultados(List<Vuelo> vuelos)
         {
-            Console.WriteLine("-----------------------------------------------------------------------------------------");
-            Console.WriteLine("|id  |num pasajeros|   fecha salida    |   fecha llegada   |Precio boleto|origen|destino|");
-            Console.WriteLine("-----------------------------------------------------------------------------------------");
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("|id  |num pasajeros|   fecha salida    |   fecha llegada   |Precio boleto|origen|destino|Tiempo trayecto|Ganancias|");
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
             foreach (Vuelo vuelo in vuelos)
             {
                 Console.Write($"|{vuelo.id_vuelo}|{((vuelo.num_pasajeros<10)?"       "+vuelo.num_pasajeros+"     ":"      "+vuelo.num_pasajeros+"     ")}|");
@@ -171,8 +171,8 @@ namespace proyecto_final_algoritmos
                         Console.Write("|");
                     }
                 }
-                Console.WriteLine();
-                Console.WriteLine("-----------------------------------------------------------------------------------------");
+                Console.WriteLine($"    {vuelo.tiempo_trayecto}  |{vuelo.ganancias_totales}");
+                Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
             }
         }
 
