@@ -428,7 +428,6 @@ namespace proyecto_final_algoritmos
                     case 1:
                         {
                             Console.WriteLine("Usted está imprimiendo todos los vuelos.");
-                            Console.WriteLine("---------------------------------");
                             Resultados(vuelos);
                             break;
                         }
