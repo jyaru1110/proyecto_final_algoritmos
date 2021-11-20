@@ -246,6 +246,7 @@ namespace proyecto_final_algoritmos
                             {
                                 Console.WriteLine("Opción inválida, ingrese un entero");
                             }
+                            vuelo.ganancias_totales = vuelo.num_pasajeros * vuelo.precio_boleto;
                         } while (vuelo.num_pasajeros < 1 || vuelo.num_pasajeros > 100);
                         break;
                     case 2:
@@ -264,6 +265,7 @@ namespace proyecto_final_algoritmos
                             {
                                 Console.WriteLine("Opción inválida, ingrese una fecha válida");
                             }
+                            vuelo.tiempo_trayecto = vuelo.fecha_llegada - vuelo.fecha_salida;
                         } while (vuelo.fecha_salida < DateTime.Now);
                         break;
                     case 3:
@@ -282,7 +284,7 @@ namespace proyecto_final_algoritmos
                             {
                                 Console.WriteLine("Opción inválida, ingrese una fecha válida");
                             }
-
+                            vuelo.tiempo_trayecto = vuelo.fecha_llegada - vuelo.fecha_salida;
                         } while (vuelo.fecha_llegada < vuelo.fecha_salida);
                         break;
                     case 4:
@@ -305,6 +307,7 @@ namespace proyecto_final_algoritmos
                             {
                                 Console.WriteLine("Opción inválida, ingrese un entero");
                             }
+                            vuelo.ganancias_totales = vuelo.num_pasajeros * vuelo.precio_boleto;
                         } while (vuelo.precio_boleto < 1);
                         break;
                 }
@@ -407,7 +410,7 @@ namespace proyecto_final_algoritmos
                 Console.WriteLine("4.- Eliminar vuelo");
                 Console.WriteLine("5.- 5 vuelos más baratos");
                 Console.WriteLine("6.- Terminar.");
-                {
+                do{
                     Console.Write("\nIngrese su elección (1-6): ");
                     string opcion_pro = Console.ReadLine();
                     if (int.TryParse(opcion_pro, out opcion2))
