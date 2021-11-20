@@ -114,6 +114,10 @@ namespace proyecto_final_algoritmos
                     Console.WriteLine("El vuelo con id " + id + " tiene una duracion de " + vuelo.tiempo_trayecto);
                     Console.WriteLine("El vuelo con id " + id + " tiene una ganancia de " + vuelo.ganancias_totales);
                 }
+                else
+                {
+                    Console.WriteLine("El vuelo con id " + id + " no existe");
+                }
             }
         }
         static void OrdenacionAscendente(List<Vuelo> vuelos)
@@ -147,21 +151,25 @@ namespace proyecto_final_algoritmos
             Console.WriteLine("-----------------------------------------------------------------------------------------");
             foreach (Vuelo vuelo in vuelos)
             {
-                Console.Write($"|{vuelo.id_vuelo}|{((vuelo.num_pasajeros<10)?"       "+vuelo.num_pasajeros+"     ":"      "+vuelo.num_pasajeros+"     ")}|");
-                Console.Write($"{((vuelo.fecha_salida.Day<10)?"0"+vuelo.fecha_salida.Day:vuelo.fecha_salida.Day)}/{((vuelo.fecha_salida.Month<10)?"0"+vuelo.fecha_salida.Month:vuelo.fecha_salida.Month)}/{vuelo.fecha_salida.Year} {vuelo.fecha_salida.ToString().Substring(vuelo.fecha_salida.ToString().Length-8)}|" );
-                Console.Write($"{((vuelo.fecha_llegada.Day<10)?"0"+vuelo.fecha_llegada.Day:vuelo.fecha_llegada.Day)}/{((vuelo.fecha_llegada.Month<10)?"0"+vuelo.fecha_llegada.Month:vuelo.fecha_llegada.Month)}/{vuelo.fecha_llegada.Year} {vuelo.fecha_llegada.ToString().Substring(vuelo.fecha_llegada.ToString().Length-8)}|");
-                Console.Write($"{((vuelo.precio_boleto<10000)?"     "+vuelo.precio_boleto+"    ":"    "+vuelo.precio_boleto+"    ")}|");
-                Console.Write($"{((vuelo.trayectoria[0].Length>=6)?vuelo.trayectoria[0].Substring(0,6)+"|":" "+vuelo.trayectoria[0])}");
-                for(int i=0; i<(6-vuelo.trayectoria[0].Length);i++){
+                Console.Write($"|{vuelo.id_vuelo}|{((vuelo.num_pasajeros < 10) ? "       " + vuelo.num_pasajeros + "     " : "      " + vuelo.num_pasajeros + "     ")}|");
+                Console.Write($"{((vuelo.fecha_salida.Day < 10) ? "0" + vuelo.fecha_salida.Day : vuelo.fecha_salida.Day)}/{((vuelo.fecha_salida.Month < 10) ? "0" + vuelo.fecha_salida.Month : vuelo.fecha_salida.Month)}/{vuelo.fecha_salida.Year} {vuelo.fecha_salida.ToString().Substring(vuelo.fecha_salida.ToString().Length - 8)}|");
+                Console.Write($"{((vuelo.fecha_llegada.Day < 10) ? "0" + vuelo.fecha_llegada.Day : vuelo.fecha_llegada.Day)}/{((vuelo.fecha_llegada.Month < 10) ? "0" + vuelo.fecha_llegada.Month : vuelo.fecha_llegada.Month)}/{vuelo.fecha_llegada.Year} {vuelo.fecha_llegada.ToString().Substring(vuelo.fecha_llegada.ToString().Length - 8)}|");
+                Console.Write($"{((vuelo.precio_boleto < 10000) ? "     " + vuelo.precio_boleto + "    " : "    " + vuelo.precio_boleto + "    ")}|");
+                Console.Write($"{((vuelo.trayectoria[0].Length >= 6) ? vuelo.trayectoria[0].Substring(0, 6) + "|" : " " + vuelo.trayectoria[0])}");
+                for (int i = 0; i < (6 - vuelo.trayectoria[0].Length); i++)
+                {
                     Console.Write(" ");
-                    if(6-vuelo.trayectoria[1].Length-1==i){
+                    if (6 - vuelo.trayectoria[1].Length - 1 == i)
+                    {
                         Console.Write("|");
                     }
                 }
-                Console.Write($"{((vuelo.trayectoria[1].Length>=6)?vuelo.trayectoria[1].Substring(0,6)+"|":" "+vuelo.trayectoria[1])}");
-                for(int i=0; i<(6-vuelo.trayectoria[1].Length);i++){
+                Console.Write($"{((vuelo.trayectoria[1].Length >= 6) ? vuelo.trayectoria[1].Substring(0, 6) + "|" : " " + vuelo.trayectoria[1])}");
+                for (int i = 0; i < (6 - vuelo.trayectoria[1].Length); i++)
+                {
                     Console.Write(" ");
-                    if(6-vuelo.trayectoria[1].Length-1==i){
+                    if (6 - vuelo.trayectoria[1].Length - 1 == i)
+                    {
                         Console.Write("|");
                     }
                 }
@@ -169,35 +177,193 @@ namespace proyecto_final_algoritmos
                 Console.WriteLine("-----------------------------------------------------------------------------------------");
             }
         }
+
+        static void EditarVuelo(List<Vuelo> vuelos)
+        {
+            int i = -1;
+            Console.WriteLine("Ingrese el id del vuelo a editar");
+            string id = Console.ReadLine();
+            foreach (Vuelo vuelo in vuelos)
+            {
+                if (vuelo.id_vuelo == id)
+                {
+                    i = vuelos.IndexOf(vuelo);
+                }
+            }
+            if (i != -1)
+            {
+                MenuEditarVuelo(vuelos, i);
+            }
+            else
+            {
+                Console.WriteLine("El vuelo con id " + id + " no existe");
+            }
+        }
+
+        static void MenuEditarVuelo(List<Vuelo> vuelos, int index)
+        {
+            int opcion = 0;
+            Vuelo vuelo = vuelos[index];
+            string input;
+            do
+            {
+                Console.WriteLine("1. Editar numero de pasajeros");
+                Console.WriteLine("2. Editar fecha de salida");
+                Console.WriteLine("3. Editar fecha de llegada");
+                Console.WriteLine("4. Editar trayectoria");
+                Console.WriteLine("5. Editar precio del boleto");
+                Console.WriteLine("6. Salir");
+                do
+                {
+                    Console.WriteLine("Ingrese su elección (1-6)");
+                    string opcion_pro = Console.ReadLine();
+                    if (int.TryParse(opcion_pro, out opcion))
+                    {
+                        if (opcion < 1 || opcion > 6)
+                        {
+                            Console.WriteLine("Opción inválida, debe de ser del 1 al 6");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ingrese una opción válida, ingrese un entero");
+                    }
+                } while (opcion < 1 || opcion > 6);
+
+                switch (opcion)
+                {
+                    case 1:
+                        do
+                        {
+                            Console.WriteLine("Ingrese el numero de pasajeros");
+                            input = Console.ReadLine();
+                            if (int.TryParse(input, out vuelo.num_pasajeros))
+                            {
+                                if (vuelo.num_pasajeros < 1 || vuelo.num_pasajeros > 100)
+                                {
+                                    Console.WriteLine("El numero de pasajeros debe estar entre 1 y 100");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Opción inválida, ingrese un entero");
+                            }
+                        } while (vuelo.num_pasajeros < 1 || vuelo.num_pasajeros > 100);
+                        break;
+                    case 2:
+                        do
+                        {
+                            Console.WriteLine("Ingrese la fecha de salida");
+                            input = Console.ReadLine();
+                            if (DateTime.TryParse(input, out vuelo.fecha_salida))
+                            {
+                                if (vuelo.fecha_salida < DateTime.Now)
+                                {
+                                    Console.WriteLine("Opción inválida, debe de ser mayor a la fecha actual.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Opción inválida, ingrese una fecha válida");
+                            }
+                        } while (vuelo.fecha_salida < DateTime.Now);
+                        break;
+                    case 3:
+                        do
+                        {
+                            Console.WriteLine("Ingrese la fecha de llegada");
+                            input = Console.ReadLine();
+                            if (DateTime.TryParse(input, out vuelo.fecha_llegada))
+                            {
+                                if (vuelo.fecha_llegada < vuelo.fecha_salida)
+                                {
+                                    Console.WriteLine("Opción inválida, debe de ser mayor a la fecha de salida.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Opción inválida, ingrese una fecha válida");
+                            }
+
+                        } while (vuelo.fecha_llegada < vuelo.fecha_salida);
+                        break;
+                    case 4:
+                        Console.WriteLine("Ingrese la nueva trayectoria");
+                        vuelo.trayectoria = Console.ReadLine().Split(' ');
+                        break;
+                    case 5:
+                        do
+                        {
+                            Console.WriteLine("Ingrese el precio del boleto");
+                            input = Console.ReadLine();
+                            if (double.TryParse(input, out vuelo.precio_boleto))
+                            {
+                                if (vuelo.precio_boleto < 1)
+                                {
+                                    Console.WriteLine("Opción inválida, debe de ser mayor a 1.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Opción inválida, ingrese un entero");
+                            }
+                        } while (vuelo.precio_boleto < 1);
+                        break;
+                }
+            }
+            while (opcion != 6);
+            vuelos[index] = vuelo;
+        }
+
+        static void EliminarVuelo(List<Vuelo> vuelos)
+        {
+            int i = -1;
+            Console.WriteLine("Ingrese el id del vuelo a eliminar");
+            string id = Console.ReadLine();
+            foreach (Vuelo vuelo in vuelos)
+            {
+                if (vuelo.id_vuelo == id)
+                {
+                    i = vuelos.IndexOf(vuelo);
+                }
+            }
+            if (i != -1)
+            {
+                vuelos.Remove(vuelos[i]);
+                Console.WriteLine("El vuelo con id " + id + " ha sido eliminado");
+            }
+            else
+            {
+                Console.WriteLine("El vuelo con id " + id + " no existe");
+            }
+        }
+
         static void Menu()
         {
             int opcion = 0;
-            bool band = false;
             List<Vuelo> vuelos = new List<Vuelo>();
             do
             {
                 Console.WriteLine("Bienvenide al programa de la aerolínea");
                 Console.WriteLine("1.- Entrada de Datos");
                 Console.WriteLine("2.- Resultados.");
-                Console.WriteLine("3.- Buscar vuelo por id.");
-                Console.WriteLine("4.- 5 vuelos más baratos");
-                Console.WriteLine("5.- Terminar.");
+                Console.WriteLine("3.- Terminar.");
                 do
                 {
-                    Console.Write("Ingrese su elección (1-5):");
-                    string opcion_pro = (Console.ReadLine());
+                    Console.Write("Ingrese su elección (1-3):");
+                    string opcion_pro = Console.ReadLine();
                     if (int.TryParse(opcion_pro, out opcion))
                     {
-                        if (opcion < 1 || opcion > 5)
+                        if (opcion < 1 || opcion > 3)
                         {
-                            Console.WriteLine("Opción inválida, debe de ser 1, 2 o 3.");
+                            Console.WriteLine("Opción inválida, debe de ser del 1 al 3");
                         }
                     }
                     else
                     {
                         Console.WriteLine("Opción inválida,Ingrese un entero");
                     }
-                } while (opcion < 1 || opcion > 5);
+                } while (opcion < 1 || opcion > 3);
 
                 switch (opcion)
                 {
@@ -206,43 +372,15 @@ namespace proyecto_final_algoritmos
                             Console.WriteLine("Usted está capturando los datos.");
                             Console.WriteLine("---------------------------------");
                             AgregarVuelo(vuelos);
-                            band = true;
                             break;
                         }
                     case 2:
                         {
-                            if (band)
+                            if (vuelos.Count != 0)
                             {
                                 Console.WriteLine("Usted está emitiendo los resultados.");
-                                Resultados(vuelos);
-                            }
-                            else
-                            {
-                                Console.WriteLine("Usted debe capturar los datos");
-                            }
-                            break;
-                        }
-                    case 3:
-                        {
-                            Console.WriteLine("Usted entró a la búsqueda de vuelos");
-                            Console.WriteLine("---------------------------------");
-                            if (band)
-                            {
-                                BuscarVuelo(vuelos);
-                            }
-                            else
-                            {
-                                Console.WriteLine("Usted debe capturar los datos");
-                            }
-                            break;
-                        }
-                    case 4:
-                        {
-                            Console.WriteLine("Los 5 vuelos más baratos son:");
-                            Console.WriteLine("---------------------------------");
-                            if (band)
-                            {
-                                OrdenacionAscendente(vuelos);
+                                Console.WriteLine("---------------------------------");
+                                Submenu(vuelos);
                             }
                             else
                             {
@@ -251,8 +389,81 @@ namespace proyecto_final_algoritmos
                             break;
                         }
                 }
-            } while (opcion != 5);
+            } while (opcion != 3);
+        }
 
+        static void Submenu(List<Vuelo> vuelos)
+        {
+            int opcion2;
+            do
+            {
+                if (vuelos.Count == 0)
+                {
+                    Console.WriteLine("No hay vuelos registrados");
+                    break;
+                }
+                Console.WriteLine("\nOpciones:");
+                Console.WriteLine("1.- Imprimir todos los vuelos.");
+                Console.WriteLine("2.- Buscar vuelo por id.");
+                Console.WriteLine("3.- Editar vuelo");
+                Console.WriteLine("4.- Eliminar vuelo");
+                Console.WriteLine("5.- 5 vuelos más baratos");
+                Console.WriteLine("6.- Terminar.");
+                {
+                    Console.Write("\nIngrese su elección (1-6): ");
+                    string opcion_pro = Console.ReadLine();
+                    if (int.TryParse(opcion_pro, out opcion2))
+                    {
+                        if (opcion2 < 1 || opcion2 > 6)
+                        {
+                            Console.WriteLine("Opción inválida, debe de ser del 1 al 6");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Opción inválida,Ingrese un entero");
+                    }
+                } while (opcion2 < 1 || opcion2 > 6) ;
+
+                switch (opcion2)
+                {
+                    case 1:
+                        {
+                            Console.WriteLine("Usted está imprimiendo todos los vuelos.");
+                            Console.WriteLine("---------------------------------");
+                            Resultados(vuelos);
+                            break;
+                        }
+                    case 2:
+                        {
+                            Console.WriteLine("Usted entró a la búsqueda de vuelos");
+                            Console.WriteLine("---------------------------------");
+                            BuscarVuelo(vuelos);
+                            break;
+                        }
+                    case 3:
+                        {
+                            Console.WriteLine("Usted entró a la edición de vuelos");
+                            Console.WriteLine("---------------------------------");
+                            EditarVuelo(vuelos);
+                            break;
+                        }
+                    case 4:
+                        {
+                            Console.WriteLine("Usted entró a la eliminación de vuelos");
+                            Console.WriteLine("---------------------------------");
+                            EliminarVuelo(vuelos);
+                            break;
+                        }
+                    case 5:
+                        {
+                            Console.WriteLine("Los 5 vuelos más baratos son:");
+                            Console.WriteLine("---------------------------------");
+                            OrdenacionAscendente(vuelos);
+                            break;
+                        }
+                }
+            } while (opcion2 != 6);
         }
         static void Main(string[] args)
         {
