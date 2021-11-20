@@ -152,14 +152,14 @@ namespace proyecto_final_algoritmos
                 Console.Write($"{((vuelo.fecha_llegada.Day<10)?"0"+vuelo.fecha_llegada.Day:vuelo.fecha_llegada.Day)}/{((vuelo.fecha_llegada.Month<10)?"0"+vuelo.fecha_llegada.Month:vuelo.fecha_llegada.Month)}/{vuelo.fecha_llegada.Year} {vuelo.fecha_llegada.ToString().Substring(vuelo.fecha_llegada.ToString().Length-8)}|");
                 Console.Write($"{((vuelo.precio_boleto<10000)?"     "+vuelo.precio_boleto+"    ":"    "+vuelo.precio_boleto+"    ")}|");
                 Console.Write($"{((vuelo.trayectoria[0].Length>=6)?vuelo.trayectoria[0].Substring(0,6)+"|":" "+vuelo.trayectoria[0])}");
-                for(int i=0; i<(6-vuelo.trayectoria[0].Length);i++){
+                for(int i=0; i<=(6-vuelo.trayectoria[0].Length);i++){
                     Console.Write(" ");
                     if(6-vuelo.trayectoria[1].Length-1==i){
                         Console.Write("|");
                     }
                 }
                 Console.Write($"{((vuelo.trayectoria[1].Length>=6)?vuelo.trayectoria[1].Substring(0,6)+"|":" "+vuelo.trayectoria[1])}");
-                for(int i=0; i<(6-vuelo.trayectoria[1].Length);i++){
+                for(int i=0; i<=(6-vuelo.trayectoria[1].Length);i++){
                     Console.Write(" ");
                     if(6-vuelo.trayectoria[1].Length-1==i){
                         Console.Write("|");
