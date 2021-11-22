@@ -30,7 +30,7 @@ namespace proyecto_final_algoritmos
         {
             Vuelo vuelo = new Vuelo();
             vuelo.id_vuelo = GenerarID();
-            Console.WriteLine("El ID del vuelo es " + vuelo.id_vuelo);
+            Console.WriteLine("La ID del vuelo es " + vuelo.id_vuelo);
             string input;
             do
             {
@@ -106,7 +106,7 @@ namespace proyecto_final_algoritmos
         }
         static void BuscarVuelo(List<Vuelo> vuelos)
         {
-            int encontrado = 0;
+            bool encontrado = false;
             Console.WriteLine("Ingrese el id del vuelo");
             string id = Console.ReadLine();
             foreach (Vuelo vuelo in vuelos)
@@ -125,36 +125,43 @@ namespace proyecto_final_algoritmos
                         }
                     }
                     Console.WriteLine("El vuelo con id " + id + " llega a la ciudad de " + vuelo.trayectoria[vuelo.trayectoria.Length-1] + " con fecha de " + vuelo.fecha_llegada + " con un tiempo total de trayecto de " + vuelo.tiempo_trayecto);
-                    encontrado = 1;
+                    encontrado = true;
                 }
             }
-            if (encontrado==0)
+            if (encontrado==false)
             {
                 Console.WriteLine("No existe un vuelo con esa ID, verifique sus datos");
             }
         }
         static void OrdenacionAscendente(List<Vuelo> vuelos)
         {
-            int k = 0;
-            for (int i = 0; i < vuelos.Count; i++)
+            if (vuelos.Count<5)
             {
-                for (int j = 0; j < vuelos.Count; j++)
+                Console.WriteLine("Necesita tener al menos 5 vuelos registrados para usar esta función, agregue al menos " + (5 - vuelos.Count) + " vuelos más.");
+            }
+            else
+            {
+                int k = 0;
+                for (int i = 0; i < vuelos.Count; i++)
                 {
-                    if (vuelos[i].precio_boleto < vuelos[j].precio_boleto)
+                    for (int j = 0; j < vuelos.Count; j++)
                     {
-                        Vuelo aux = vuelos[i];
-                        vuelos[i] = vuelos[j];
-                        vuelos[j] = aux;
+                        if (vuelos[i].precio_boleto < vuelos[j].precio_boleto)
+                        {
+                            Vuelo aux = vuelos[i];
+                            vuelos[i] = vuelos[j];
+                            vuelos[j] = aux;
+                        }
                     }
                 }
-            }
-            foreach (Vuelo vuelo in vuelos)
-            {
-                if (k < 5)
+                foreach (Vuelo vuelo in vuelos)
                 {
-                    Console.WriteLine("El vuelo con id " + vuelo.id_vuelo + " tiene una ganancia de " + vuelo.ganancias_totales);
+                    if (k < 5)
+                    {
+                        Console.WriteLine("El vuelo con id " + vuelo.id_vuelo + " tiene una ganancia de " + vuelo.ganancias_totales);
+                    }
+                    k++;
                 }
-                k++;
             }
         }
         static void Resultados(List<Vuelo> vuelos)
