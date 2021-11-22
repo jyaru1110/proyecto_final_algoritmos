@@ -30,6 +30,7 @@ namespace proyecto_final_algoritmos
         {
             Vuelo vuelo = new Vuelo();
             vuelo.id_vuelo = GenerarID();
+            Console.WriteLine("El ID del vuelo es " + vuelo.id_vuelo);
             string input;
             do
             {
@@ -49,7 +50,7 @@ namespace proyecto_final_algoritmos
             } while (vuelo.num_pasajeros < 1 || vuelo.num_pasajeros > 99);
             do
             {
-                Console.WriteLine("Ingrese la fecha de salida");
+                Console.WriteLine("Ingrese la fecha y hora de salida (DD/MM/AA hh:mm): ");
                 input = Console.ReadLine();
                 if (DateTime.TryParse(input, out vuelo.fecha_salida))
                 {
@@ -65,7 +66,7 @@ namespace proyecto_final_algoritmos
             } while (vuelo.fecha_salida < DateTime.Now);
             do
             {
-                Console.WriteLine("Ingrese la fecha de llegada");
+                Console.WriteLine("Ingrese la fecha y hora de llegada (DD/MM/AA hh:mm): ");
                 input = Console.ReadLine();
                 if (DateTime.TryParse(input, out vuelo.fecha_llegada))
                 {
@@ -81,7 +82,7 @@ namespace proyecto_final_algoritmos
 
             } while (vuelo.fecha_llegada < vuelo.fecha_salida);
             Console.WriteLine("Ingrese la trayectoria");
-            vuelo.trayectoria = Console.ReadLine().Split(' ');
+            vuelo.trayectoria = Console.ReadLine().Split('-');
             do
             {
                 Console.WriteLine("Ingrese el precio del boleto");
@@ -101,9 +102,11 @@ namespace proyecto_final_algoritmos
             vuelo.ganancias_totales = vuelo.num_pasajeros * vuelo.precio_boleto;
             vuelo.tiempo_trayecto = vuelo.fecha_llegada - vuelo.fecha_salida;
             vuelos.Add(vuelo);
+            Console.WriteLine();
         }
         static void BuscarVuelo(List<Vuelo> vuelos)
         {
+            int encontrado = 0;
             Console.WriteLine("Ingrese el id del vuelo");
             string id = Console.ReadLine();
             foreach (Vuelo vuelo in vuelos)
@@ -111,13 +114,23 @@ namespace proyecto_final_algoritmos
                 if (vuelo.id_vuelo == id)
                 {
                     Console.WriteLine("El vuelo con id " + id + " tiene " + vuelo.num_pasajeros + " pasajeros");
-                    Console.WriteLine("El vuelo con id " + id + " tiene una duracion de " + vuelo.tiempo_trayecto);
-                    Console.WriteLine("El vuelo con id " + id + " tiene una ganancia de " + vuelo.ganancias_totales);
+                    Console.WriteLine("El vuelo con id " + id + " tiene un costo de " + vuelo.precio_boleto + " por boleto, acumulando un total de ganancias de $" + vuelo.ganancias_totales);
+                    Console.WriteLine("El vuelo con id " + id + " sale de la ciudad de " + vuelo.trayectoria[0] + " con fecha de " + vuelo.fecha_salida);
+                    if(vuelo.trayectoria.Length>2)
+                    {
+                        Console.Write("Haciendo escala en: " + vuelo.trayectoria[1]);
+                        for(int i=2;i<vuelo.trayectoria.Length-1;i++)
+                        {
+                            Console.Write(", " + vuelo.trayectoria[i]);
+                        }
+                    }
+                    Console.WriteLine("El vuelo con id " + id + " llega a la ciudad de " + vuelo.trayectoria[vuelo.trayectoria.Length-1] + " con fecha de " + vuelo.fecha_llegada + " con un tiempo total de trayecto de " + vuelo.tiempo_trayecto);
+                    encontrado = 1;
                 }
-                else
-                {
-                    Console.WriteLine("El vuelo con id " + id + " no existe");
-                }
+            }
+            if (encontrado==0)
+            {
+                Console.WriteLine("No existe un vuelo con esa ID, verifique sus datos");
             }
         }
         static void OrdenacionAscendente(List<Vuelo> vuelos)
@@ -151,22 +164,24 @@ namespace proyecto_final_algoritmos
             Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
             foreach (Vuelo vuelo in vuelos)
             {
-                Console.Write($"|{vuelo.id_vuelo}|{((vuelo.num_pasajeros<10)?"       "+vuelo.num_pasajeros+"     ":"      "+vuelo.num_pasajeros+"     ")}|");
-                Console.Write($"{((vuelo.fecha_salida.Day<10)?"0"+vuelo.fecha_salida.Day:vuelo.fecha_salida.Day)}/{((vuelo.fecha_salida.Month<10)?"0"+vuelo.fecha_salida.Month:vuelo.fecha_salida.Month)}/{vuelo.fecha_salida.Year} {vuelo.fecha_salida.ToString().Substring(vuelo.fecha_salida.ToString().Length-8)}|" );
-                Console.Write($"{((vuelo.fecha_llegada.Day<10)?"0"+vuelo.fecha_llegada.Day:vuelo.fecha_llegada.Day)}/{((vuelo.fecha_llegada.Month<10)?"0"+vuelo.fecha_llegada.Month:vuelo.fecha_llegada.Month)}/{vuelo.fecha_llegada.Year} {vuelo.fecha_llegada.ToString().Substring(vuelo.fecha_llegada.ToString().Length-8)}|");
-                Console.Write($"{((vuelo.precio_boleto<10000)?"     "+vuelo.precio_boleto+"    ":"    "+vuelo.precio_boleto+"    ")}|");
-                Console.Write($"{((vuelo.trayectoria[0].Length>=6)?vuelo.trayectoria[0].Substring(0,6)+"|":" "+vuelo.trayectoria[0])}");
-                for(int i=0; i<=(6-vuelo.trayectoria[0].Length);i++){
+                Console.Write($"|{vuelo.id_vuelo}|{((vuelo.num_pasajeros < 10) ? "       " + vuelo.num_pasajeros + "     " : "      " + vuelo.num_pasajeros + "     ")}|");
+                Console.Write($"{((vuelo.fecha_salida.Day < 10) ? "0" + vuelo.fecha_salida.Day : vuelo.fecha_salida.Day)}/{((vuelo.fecha_salida.Month < 10) ? "0" + vuelo.fecha_salida.Month : vuelo.fecha_salida.Month)}/{vuelo.fecha_salida.Year} {vuelo.fecha_salida.ToString().Substring(vuelo.fecha_salida.ToString().Length - 8)}|");
+                Console.Write($"{((vuelo.fecha_llegada.Day < 10) ? "0" + vuelo.fecha_llegada.Day : vuelo.fecha_llegada.Day)}/{((vuelo.fecha_llegada.Month < 10) ? "0" + vuelo.fecha_llegada.Month : vuelo.fecha_llegada.Month)}/{vuelo.fecha_llegada.Year} {vuelo.fecha_llegada.ToString().Substring(vuelo.fecha_llegada.ToString().Length - 8)}|");
+                Console.Write($"{((vuelo.precio_boleto < 10000) ? "     " + vuelo.precio_boleto + "    " : "    " + vuelo.precio_boleto + "    ")}|");
+                Console.Write($"{((vuelo.trayectoria[0].Length >= 6) ? vuelo.trayectoria[0].Substring(0, 6) + "|" : " " + vuelo.trayectoria[0])}");
+                for (int i = 0; i <= (6 - vuelo.trayectoria[0].Length); i++)
+                {
                     Console.Write(" ");
-                    if (6 - vuelo.trayectoria[1].Length - 1 == i)
+                    if (6 - vuelo.trayectoria[0].Length - 1 == i)
                     {
                         Console.Write("|");
                     }
                 }
-                Console.Write($"{((vuelo.trayectoria[1].Length>=6)?vuelo.trayectoria[1].Substring(0,6)+"|":" "+vuelo.trayectoria[1])}");
-                for(int i=0; i<=(6-vuelo.trayectoria[1].Length);i++){
+                Console.Write($"{((vuelo.trayectoria[vuelo.trayectoria.Length-1].Length >= 6) ? vuelo.trayectoria[vuelo.trayectoria.Length - 1].Substring(0, 6) + "|" : " " + vuelo.trayectoria[vuelo.trayectoria.Length - 1])}");
+                for (int i = 0; i <= (6 - vuelo.trayectoria[vuelo.trayectoria.Length - 1].Length); i++)
+                {
                     Console.Write(" ");
-                    if (6 - vuelo.trayectoria[1].Length - 1 == i)
+                    if (6 - vuelo.trayectoria[vuelo.trayectoria.Length - 1].Length - 1 == i)
                     {
                         Console.Write("|");
                     }
@@ -372,7 +387,27 @@ namespace proyecto_final_algoritmos
                         {
                             Console.WriteLine("Usted está capturando los datos.");
                             Console.WriteLine("---------------------------------");
-                            AgregarVuelo(vuelos);
+                            int numVuelos = 0;
+                            do
+                            {
+                                Console.WriteLine("¿Cuántos vuelos desea agregar? ");
+                                string x = Console.ReadLine();
+                                if (int.TryParse(x, out numVuelos))
+                                {
+                                    if (numVuelos < 1)
+                                    {
+                                        Console.WriteLine("El numero de vuelos debe ser mayor a 0");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Opción inválida, ingrese un entero");
+                                }
+                            } while (numVuelos < 1);
+                            for (int i=0; i<numVuelos;i++)
+                            {
+                                AgregarVuelo(vuelos);
+                            }
                             break;
                         }
                     case 2:
@@ -410,7 +445,8 @@ namespace proyecto_final_algoritmos
                 Console.WriteLine("4.- Eliminar vuelo");
                 Console.WriteLine("5.- 5 vuelos más baratos");
                 Console.WriteLine("6.- Terminar.");
-                do{
+                do
+                {
                     Console.Write("\nIngrese su elección (1-6): ");
                     string opcion_pro = Console.ReadLine();
                     if (int.TryParse(opcion_pro, out opcion2))
@@ -424,7 +460,7 @@ namespace proyecto_final_algoritmos
                     {
                         Console.WriteLine("Opción inválida,Ingrese un entero");
                     }
-                } while (opcion2 < 1 || opcion2 > 6) ;
+                } while (opcion2 < 1 || opcion2 > 6);
 
                 switch (opcion2)
                 {
