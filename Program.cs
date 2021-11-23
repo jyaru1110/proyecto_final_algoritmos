@@ -52,7 +52,7 @@ namespace proyecto_final_algoritmos
                 {
                     Console.WriteLine("Opción inválida, ingrese un entero");
                 }
-            } while (vuelo.num_pasajeros < 1 || vuelo.num_pasajeros > 99);
+            } while (vuelo.num_pasajeros < 1 || vuelo.num_pasajeros > 100);
             Console.WriteLine("Ingrese la trayectoria separando las ciudades con un guión (-)");
             vuelo.trayectoria = Console.ReadLine().Split('-');
             do
@@ -283,7 +283,7 @@ namespace proyecto_final_algoritmos
                     case 2:
                         do
                         {
-                            Console.WriteLine("Ingrese la fecha de salida");
+                            Console.WriteLine("Ingrese la fecha y hora de salida (DD/MM/AA hh:mm): ");
                             input = Console.ReadLine();
                             if (DateTime.TryParse(input, out vuelo.fecha_salida))
                             {
@@ -302,7 +302,7 @@ namespace proyecto_final_algoritmos
                     case 3:
                         do
                         {
-                            Console.WriteLine("Ingrese la fecha de llegada");
+                            Console.WriteLine("Ingrese la fecha y hora de llegada (DD/MM/AA hh:mm): ");
                             input = Console.ReadLine();
                             if (DateTime.TryParse(input, out vuelo.fecha_llegada))
                             {
