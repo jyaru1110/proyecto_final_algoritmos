@@ -172,9 +172,26 @@ namespace proyecto_final_algoritmos
                 }
             }
         }
+        //This method sort the list by the left date
+        static void OrdenacionPorFechaDeSalida(List<Vuelo> vuelos){
+            Vuelo aux;
+            for (int i = 0; i < vuelos.Count; i++)
+                {
+                    for (int j = 0; j < vuelos.Count; j++)
+                    {
+                        if (vuelos[i].fecha_salida < vuelos[j].fecha_salida)
+                        {
+                            aux = vuelos[i];
+                            vuelos[i] = vuelos[j];
+                            vuelos[j] = aux;
+                        }
+                    }
+                }
+        }
         //This method prints every flight in the list.
         static void Resultados(List<Vuelo> vuelos)
         {
+            OrdenacionPorFechaDeSalida(vuelos);
             Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("|id  |num pasajeros|   fecha salida    |   fecha llegada   |Precio boleto|origen|destino|Tiempo trayecto|Ganancias|");
             Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
