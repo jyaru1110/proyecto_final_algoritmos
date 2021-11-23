@@ -10,13 +10,13 @@ namespace proyecto_final_algoritmos
         struct Vuelo
         {
             public int num_pasajeros;
-            public DateTime fecha_salida;
-            public DateTime fecha_llegada;
-            public string[] trayectoria;
-            public string id_vuelo;
-            public double precio_boleto;
-            public double ganancias_totales;
-            public TimeSpan tiempo_trayecto;
+            public DateTime fecha_salida;// saves the depature time
+            public DateTime fecha_llegada;// saves the arrival time
+            public string[] trayectoria;// saves the route
+            public string id_vuelo;// saves the flight id
+            public double precio_boleto;// saves the ticket price
+            public double ganancias_totales;// saves the total earnings
+            public TimeSpan tiempo_trayecto;// saves the total time of the route
         }
         //This method generates a unique id for each flight.
         static string GenerarID()
