@@ -172,7 +172,7 @@ namespace proyecto_final_algoritmos
                 }
             }
         }
-        //This method sort the list by the left date
+        //This method sort the list by the the departure date
         static void OrdenacionPorFechaDeSalida(List<Vuelo> vuelos){
             Vuelo aux;
             for (int i = 0; i < vuelos.Count; i++)
